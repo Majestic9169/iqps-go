@@ -1,4 +1,5 @@
 import type { Component } from "solid-js";
+import { Router, Route } from '@solidjs/router';
 import CourseSearchForm from "./components/SearchForm";
 import "./styles/styles.scss";
 
@@ -10,7 +11,9 @@ const App: Component = () => {
         <p><i>Search for question papers when the library can't save you.</i></p>
         <p>Made with ❤️ and {"</>"} by <a href="https://github.com/metakgp/iqps-go" target="_blank">MetaKGP</a></p>
       </div>
-      <CourseSearchForm />
+      <Router>
+        <Route path="/" component={CourseSearchForm} />
+      </Router>
     </div>
   );
 };
