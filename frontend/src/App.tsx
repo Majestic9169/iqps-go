@@ -2,6 +2,7 @@ import type { Component } from "solid-js";
 import { Router, Route } from '@solidjs/router';
 import CourseSearchForm from "./components/SearchForm";
 import "./styles/styles.scss";
+import UploadForm from "./components/UploadForm";
 
 const App: Component = () => {
   return (
@@ -13,6 +14,7 @@ const App: Component = () => {
       </div>
       <Router>
         <Route path="/" component={CourseSearchForm} />
+        <Route path="/upload" component={UploadForm} />
       </Router>
     </div>
   );
