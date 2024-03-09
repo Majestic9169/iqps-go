@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -151,6 +152,35 @@ func search(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func upload(w http.ResponseWriter, r *http.Request){
+	// Maximum upload size of 5MB
+	r.ParseMultipartForm(5 << 20)
+
+	file, handler, err := r.FormFile("file")
+	if err != nil {
+		fmt.Println("error retrieving the File", err)
+		return
+	}
+
+	defer file.Close()
+	fmt.Println("Filename:", handler.Filename)
+	fmt.Println("Size", handler.Size)
+
+	dest, err := os.Create(handler.Filename)
+	if err != nil{
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer dest.Close()
+	
+	if _, err := io.Copy(dest, file); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Fprintf(w, "File upload successful\n")
+}
+
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -177,6 +207,7 @@ func main() {
 	http.HandleFunc("/search", search)
 	http.HandleFunc("/year", year)
 	http.HandleFunc("/library", library)
+	http.HandleFunc("/upload", upload)
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"https://beta.qp.metakgp.org", "http://localhost:3000"},
