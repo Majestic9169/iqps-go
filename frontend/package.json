@@ -10,15 +10,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "sass": "^1.70.0",
-    "solid-devtools": "^0.29.2",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.11",
-    "vite-plugin-solid": "^2.8.2"
+    "sass": "^1.71.1",
+    "solid-devtools": "^0.29.3",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5",
+    "vite-plugin-solid": "^2.10.1"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.2.0",
+    "@solidjs/router": "^0.13.0",
+    "@vercel/analytics": "^1.2.2",
     "solid-icons": "^1.1.0",
-    "solid-js": "^1.8.11"
+    "solid-js": "^1.8.15"
   }
 }
